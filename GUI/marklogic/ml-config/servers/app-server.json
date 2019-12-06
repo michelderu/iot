@@ -1,0 +1,14 @@
+{
+  "server-name": "%%mlAppName%%",
+  "group-name": "%%mlGroup%%",
+  "server-type": "http",
+  "root": "/",
+  "port": "%%mlRestPort%%",
+  "content-database": "data-hub-FINAL",
+  "modules-database": "%%mlAppName%%-modules",
+
+  "authentication": "digest",
+  "default-user": "%%mlAppName%%-user",
+  "log-errors": true,
+  "default-error-format": "compatible"
+}

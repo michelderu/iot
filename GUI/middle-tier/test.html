@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>grove-core-api test page</title>
+  <script src="https://unpkg.com/vue"></script>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" crossorigin="anonymous">
+  <style>
+    body {
+      margin: 2em 6em;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>grove-core-api test page</h1>
+    <form v-on:submit.prevent="runTests()">
+      <div class="form-group">
+        <label for="exampleInputPassword1">Username</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" v-model="creds.username" placeholder="A valid username">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" v-model="creds.password" placeholder="A valid password">
+      </div>
+      <button type="submit" class="btn btn-default">Run tests</button>
+    </form>
+    <table class="table table-striped table-bordered table-hover">
+      <caption>Test results.</caption>
+      <thead>
+        <tr>
+          <th>Test suite</th>
+          <th>Test case</th>
+          <th>Request</th>
+          <th>Expected</th>
+          <th>Result</th>
+          <th>OK?</th>
+        </tr>
+      </thead>
+      <tbody v-for="(suite, $suiteIndex) in testSuites" :key="$suiteIndex">
+        <tr v-for="(test, $testIndex) in suite.tests" :key="$testIndex" :class="test.compare ? 'success' : 'danger'">
+          <th scope="row"><span v-if="$testIndex === 0">{{ suite.name }}</span></th>
+          <th scope="row">{{ test.case }}</th>
+          <td><pre>{{ test.request | pretty }}</pre></td>
+          <td><pre>{{ test.expected | pretty }}</pre></td>
+          <td><pre>{{ test.response | pretty }}</pre></td>
+          <td>{{ test.compare ? 'OK' : 'NOT OK' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const creds = { username: "admin", password: "admin" };
+    var app = new Vue({
+      el: '#app',
+      data: {
+        creds: creds,
+        testSuites: [{
+          name: "Auth login",
+          tests: [{
+            case: "Wrong method",
+            request: {
+              method: "GET",
+              url: "api/auth/login"
+            },
+            expected: {
+              status: 405,
+              headers: {
+                allow: "POST"
+              },
+              body: {
+                message: "Allowed methods: POST",
+              }
+            },
+            response: {},
+            compare: false
+          },{
+            case: "Bad mime-type",
+            request: {
+              method: "POST",
+              url: "api/auth/login",
+              headers: {
+                "Content-Type": "plain/text",
+                "Accept": "application/json"
+              },
+              body: creds
+            },
+            expected: {
+              status: 415,
+              body: {
+                message: "Supported Content-Types: application/json"
+              }
+            },
+            response: {},
+            compare: false
+          },{
+            case: "Bad accept",
+            request: {
+              method: "POST",
+              url: "api/auth/login",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "plain/text"
+              },
+              body: creds
+            },
+            expected: {
+              status: 406,
+              body: {
+                message: "Supported Accept Types: application/json"
+              }
+            },
+            response: {},
+            compare: false
+          },{
+            case: "Bad body",
+            request: {
+              method: "POST",
+              url: "api/auth/login",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: {},
+            },
+            expected: {
+              status: 400,
+              body: {
+                message: "Required parameters: username, password"
+              }
+            },
+            response: {},
+            compare: false
+          },{
+            case: "Wrong pwd",
+            request: {
+              method: "POST",
+              url: "api/auth/login",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: {
+                username: "wrong",
+                password: "wrong"
+              }
+            },
+            expected: {
+              status: 401,
+              body: {
+                message: "Invalid credentials"
+              }
+            },
+            response: {},
+            compare: false
+          },{
+            case: "OK",
+            request: {
+              method: "POST",
+              url: "api/auth/login",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: creds
+            },
+            expected: {
+              status: 200,
+              body: {
+                authenticated: true,
+                username: creds.username
+              }
+            },
+            response: {},
+            compare: false
+          }]
+        },{
+          name: "Auth logout",
+          tests: [{
+            case: "Wrong method",
+            request: {
+              method: "GET",
+              url: "api/auth/logout"
+            },
+            expected: {
+              status: 405,
+              headers: {
+                allow: "POST"
+              },
+              body: {
+                message: "Allowed methods: POST",
+              }
+            },
+            response: {},
+            compare: false
+          },{
+            case: "OK",
+            request: {
+              method: "POST",
+              url: "api/auth/logout"
+            },
+            expected: {
+              status: 204
+            },
+            response: {},
+            compare: false
+          }]
+        }]
+      },
+      methods: {
+        fetch: function (method, url, init) {
+          try {
+            init = init || {};
+            init.method = method;
+            init.cache = "no-cache";
+            return fetch(url, init)
+              .catch(console.log)
+              .then(response => {
+                var headers = {};
+                for (var h of response.headers) {
+                  headers[h[0]] = h[1];
+                }
+                if (response.status === 204) {
+                  return Promise.resolve({
+                    status: response.status,
+                    headers: headers
+                  });
+                } else {
+                  return response.json().then(body => {
+                    return {
+                      status: response.status,
+                      headers: headers,
+                      body: body
+                    };
+                  });
+                }
+              });
+          } catch (e) {
+            console.log(e);
+            return Promise.resolve({});
+          }
+        },
+        runTests: function () {
+          this.testSuites.forEach(suite => {
+            suite.tests.forEach(test => {
+              this.fetch(test.request.method, test.request.url, {
+                headers: test.request.headers,
+                body: test.request.body && JSON.stringify(test.request.body)
+              }).then( response => {
+                test.response = this.filter(test.expected, response);
+                test.compare = this.compare(test.expected, response);
+              });
+            });
+          });
+        },
+        filter: function(expected, response) {
+          var filtered = {};
+          Object.entries(expected).forEach(([key, value]) => {
+            var responseValue = response[key];
+            if (value !== null && typeof value === 'object') {
+              // recurse into child properties
+              filtered[key] = this.filter(value, responseValue);
+            } else {
+              filtered[key] = responseValue;
+            }
+          });
+          return filtered;
+        },
+        compare: function(expected, response) {
+          var stillEqual = true;
+          Object.entries(expected).forEach(([key, value]) => {
+            if (stillEqual) {
+              var responseValue = response[key];
+              if (value !== null && typeof value === 'object') {
+                // recurse into child properties
+                stillEqual = this.compare(value, responseValue);
+              } else {
+                stillEqual = value === responseValue;
+              }
+            }
+          });
+          return stillEqual;
+        }
+      },
+      filters: {
+        pretty: function(value) {
+          return JSON.stringify(value, null, 2);
+        }
+      }
+    })
+  </script>
+</body>
+</html>

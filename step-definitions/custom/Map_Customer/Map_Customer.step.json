@@ -1,0 +1,22 @@
+{
+  "lang" : "zxx",
+  "name" : "Map_Customer",
+  "description" : "",
+  "type" : "CUSTOM",
+  "version" : 3,
+  "options" : {
+    "additionalCollections" : [ ],
+    "sourceQuery" : "cts.collectionQuery([\"CRM\"])",
+    "targetEntity" : "Customer",
+    "collections" : [ "Map_Customer", "Customer" ],
+    "sourceDatabase" : "data-hub-STAGING",
+    "sourceCollection" : "CRM",
+    "outputFormat" : "json",
+    "targetDatabase" : "data-hub-FINAL"
+  },
+  "customHook" : { },
+  "modulePath" : "/custom-modules/custom/Map_Customer/main.sjs",
+  "retryLimit" : 0,
+  "batchSize" : 100,
+  "threadCount" : 4
+}

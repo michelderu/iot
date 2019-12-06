@@ -1,0 +1,10 @@
+*-timestamps.properties
+*.log
+.DS_Store
+/MarkLogic/
+build/
+node_modules/
+.gradle/
+.ipynb_checkpoints/
+.tmp/
+__pycache__/

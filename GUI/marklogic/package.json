@@ -1,0 +1,32 @@
+{
+  "name": "@marklogic-community/grove-ml-gradle",
+  "version": "1.0.0",
+  "description": "Gradle plugin to support automating MarkLogic tasks for Grove",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marklogic-community/grove-ml-gradle.git"
+  },
+  "keywords": [
+    "Gradle",
+    "MarkLogic"
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/marklogic-community/grove-ml-gradle/issues"
+  },
+  "homepage": "https://github.com/marklogic-community/grove-ml-gradle#readme",
+  "contributors": [
+    {
+      "name": "Matt Pileggi",
+      "url": "https://github.com/withjam"
+    },
+    {
+      "name": "Marianne Myers",
+      "url": "https://github.com/mariannemyers"
+    },
+    {
+      "name": "Geert Josten",
+      "url": "https://github.com/grtjn"
+    }
+  ]
+}

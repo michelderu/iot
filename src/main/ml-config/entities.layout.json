@@ -1,0 +1,23 @@
+{
+  "Customer" : {
+    "x" : 294,
+    "y" : 93,
+    "width" : 350,
+    "height" : 234,
+    "vertices" : { }
+  },
+  "Subscription" : {
+    "x" : 365,
+    "y" : 391,
+    "width" : 350,
+    "height" : 234,
+    "vertices" : { }
+  },
+  "IOT" : {
+    "x" : 880,
+    "y" : 92,
+    "width" : 392,
+    "height" : 258,
+    "vertices" : { }
+  }
+}

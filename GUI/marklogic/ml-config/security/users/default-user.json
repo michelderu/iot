@@ -1,0 +1,8 @@
+{
+  "user-name": "%%mlAppName%%-user",
+  "description": "The default user for the %%mlAppName%% application",
+  "password": "%%appUserPassword%%",
+  "role": [
+    "%%mlAppName%%-role"
+  ]
+}

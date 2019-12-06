@@ -1,0 +1,71 @@
+{
+  "name": "@marklogic-community/grove-react-ui",
+  "version": "1.0.0",
+  "proxy": "http://localhost:9003",
+  "engines": {
+    "node": ">=8.10.0",
+    "npm": ">=5.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:marklogic-community/grove-react-ui.git"
+  },
+  "dependencies": {
+    "@marklogic-community/grove-core-react-components": "^1.0.0",
+    "@marklogic-community/grove-core-react-redux-containers": "^1.0.0",
+    "bootstrap": "^3.4.1",
+    "bootstrap-material-design": "^0.5.10",
+    "query-string": "^6.4.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^5.1.1",
+    "react-scripts": "^2.1.8",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "grove": {
+    "templateID": "grove-react-ui",
+    "templateVersion": "1.0.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "start": "react-scripts start",
+    "devtools-server": "node start-remote-redux-devtools-server.js",
+    "build": "npm run lint && react-scripts build",
+    "test": "npm run lint && react-scripts test",
+    "test:watch": "npm run lint && react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "eslint-config-prettier": "^2.10.0",
+    "eslint-plugin-prettier": "^2.7.0",
+    "jest-enzyme": "^4.0.2",
+    "nock": "^9.6.1",
+    "prettier": "^1.17.0",
+    "react-test-renderer": "^16.8.6"
+  },
+  "license": "Apache-2.0",
+  "contributors": [
+    {
+      "name": "Matt Pileggi",
+      "url": "https://github.com/withjam"
+    },
+    {
+      "name": "Marianne Myers",
+      "url": "https://github.com/mariannemyers"
+    },
+    {
+      "name": "Geert Josten",
+      "url": "https://github.com/grtjn"
+    }
+  ],
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

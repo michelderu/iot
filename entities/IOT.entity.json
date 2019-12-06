@@ -1,0 +1,47 @@
+{
+  "info" : {
+    "title" : "IOT",
+    "version" : "0.0.1",
+    "baseUri" : "http://example.org/"
+  },
+  "definitions" : {
+    "IOT" : {
+      "primaryKey" : "id",
+      "required" : [ ],
+      "pii" : [ ],
+      "elementRangeIndex" : [ ],
+      "rangeIndex" : [ ],
+      "wordLexicon" : [ ],
+      "properties" : {
+        "id" : {
+          "datatype" : "string",
+          "description" : "Data frame id",
+          "collation" : "http://marklogic.com/collation/codepoint"
+        },
+        "device_id" : {
+          "datatype" : "string",
+          "description" : "Unique device id",
+          "collation" : "http://marklogic.com/collation/codepoint"
+        },
+        "co" : {
+          "datatype" : "decimal",
+          "description" : "Carbonmonixide (ppm)"
+        },
+        "water_temp" : {
+          "datatype" : "decimal"
+        },
+        "request_temp" : {
+          "datatype" : "decimal"
+        },
+        "outside_temp" : {
+          "datatype" : "decimal"
+        },
+        "co_warning" : {
+          "datatype" : "boolean",
+          "description" : "True if co > 5",
+          "collation" : "http://marklogic.com/collation/codepoint"
+        }
+      }
+    }
+  }
+}

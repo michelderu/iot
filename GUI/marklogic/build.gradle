@@ -1,0 +1,89 @@
+/*
+ * The most minimal ml-gradle file just has one thing - the ml-gradle plugin declaration.
+ *
+ * Without a gradle.properties file with properties such as mlAppName and mlRestPort, ml-gradle will use some sensible
+ * defaults to generate a new application - an app name of my-app, port 8003, and a username/password combo of
+ * admin/admin.
+ */
+
+plugins {
+  id "net.saliman.properties" version "1.4.6"
+  id "com.marklogic.ml-gradle" version "3.14.0"
+}
+
+repositories {
+  jcenter()
+  maven { url "http://developer.marklogic.com/maven2/" }
+}
+
+configurations {
+  mlcp {
+    // stop Gradle from complaining about "SLF4J: Class path contains multiple SLF4J bindings."
+    exclude group: 'ch.qos.logback', module: 'logback-classic'
+    exclude group: 'org.apache.avro', module: 'avro-tools'
+  }
+}
+
+dependencies {
+  mlcp "com.marklogic:mlcp:10.0.2"
+
+  /**
+   * mlcp uses Log4j for logging, and if Log4j can't find a configuration file, it will complain and you'll
+   * get none of mlcp's usually-useful logging. It is recommended then that your Gradle configuration for
+   * mlcp include a directory or some other resource that provides a log4j.properties file.
+   */
+  mlcp files("mlcp/conf")
+  mlcp files("mlcp/lib")
+}
+
+/**
+ * Extra tasks necessary to ensure proper Grove access to necessary schemas and modules.
+*/
+task setSchemasPermissions(type: com.marklogic.gradle.task.ServerEvalTask) {
+  doFirst {
+    println "Changing permissions in " + mlAppConfig.schemasDatabaseName + " for:"
+  }
+  xquery = "xdmp:invoke('/admin/fix-permissions.xqy', (), map:entry('database', xdmp:database('" + mlAppConfig.schemasDatabaseName + "')))"
+}
+
+task setModulesPermissions(type: com.marklogic.gradle.task.ServerEvalTask) {
+  doFirst {
+    println "Changing permissions in " + mlAppConfig.modulesDatabaseName + " for:"
+  }
+  xquery = "xdmp:invoke('/admin/fix-permissions.xqy', (), map:entry('database', xdmp:database('" + mlAppConfig.modulesDatabaseName + "')))"
+}
+
+//mlLoadSchemas.finalizedBy setSchemasPermissions
+mlLoadModules.finalizedBy setModulesPermissions
+//mlDeploy.finalizedBy setSchemasPermissions
+mlDeploy.finalizedBy setModulesPermissions
+
+task mlLoadContent(type: com.marklogic.gradle.task.MlcpTask) {
+  systemProperty "java.library.path", "mlcp/lib/native"
+  classpath = configurations.mlcp
+  command = "IMPORT"
+  port = mlAppConfig.restPort
+  input_file_path = "ml-content/"
+  output_collections = "config"
+  output_permissions = mlAppConfig.name + "-role,read," + mlAppConfig.name + "-role,update"
+  output_uri_replace = ".*ml-content/,'/'"
+}
+
+mlDeploy.finalizedBy mlLoadContent
+
+/** 
+ * Use MlcpTask to load sample people data to support Grove.  Each document
+ * represents a fictitious person.
+*/
+task loadSampleData(type: com.marklogic.gradle.task.MlcpTask) {
+  systemProperty "java.library.path", "mlcp/lib/native"
+  classpath = configurations.mlcp
+  command = "IMPORT"
+  port = mlAppConfig.restPort
+  input_file_path = "sample-data.zip"
+  input_compressed = "true"
+  output_collections = "data,data/people"
+  output_permissions = mlAppConfig.name + "-role,read," + mlAppConfig.name + "-role,update"
+  output_uri_replace = ".*.zip,''"
+}
+

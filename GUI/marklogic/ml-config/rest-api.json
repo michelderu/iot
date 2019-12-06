@@ -1,0 +1,12 @@
+{
+  "rest-api": {
+    "name": "%%mlAppName%%",
+    "group": "%%mlGroup%%",
+    "database": "data-hub-FINAL",
+    "modules-database": "%%mlAppName%%-modules",
+    "port": "%%mlRestPort%%",
+    "xdbc-enabled": true,
+    "forests-per-host": "%%mlContentForestsPerHost%%",
+    "error-format": "compatible"
+  }
+}

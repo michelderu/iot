@@ -1,0 +1,80 @@
+{
+  "info" : {
+    "title" : "Customer",
+    "version" : "0.0.1",
+    "baseUri" : "http://example.org/"
+  },
+  "definitions" : {
+    "Customer" : {
+      "primaryKey" : "id",
+      "required" : [ ],
+      "pii" : [ "firstname", "lastname", "email", "address" ],
+      "elementRangeIndex" : [ ],
+      "rangeIndex" : [ ],
+      "wordLexicon" : [ ],
+      "properties" : {
+        "id" : {
+          "datatype" : "int",
+          "description" : "Unique customer id"
+        },
+        "firstname" : {
+          "datatype" : "string",
+          "description" : "",
+          "collation" : "http://marklogic.com/collation/codepoint"
+        },
+        "lastname" : {
+          "datatype" : "string",
+          "collation" : "http://marklogic.com/collation/codepoint"
+        },
+        "email" : {
+          "datatype" : "string",
+          "collation" : "http://marklogic.com/collation/codepoint"
+        },
+        "address" : {
+          "datatype" : "string",
+          "collation" : "http://marklogic.com/collation/codepoint"
+        },
+        "subscriptions" : {
+          "datatype" : "array",
+          "description" : "Subscriptions from ERP",
+          "items" : {
+            "$ref" : "#/definitions/Subscription"
+          }
+        }
+      }
+    },
+    "Subscription" : {
+      "required" : [ ],
+      "pii" : [ ],
+      "elementRangeIndex" : [ ],
+      "rangeIndex" : [ ],
+      "wordLexicon" : [ ],
+      "properties" : {
+        "device" : {
+          "datatype" : "string",
+          "description" : "Type of device",
+          "collation" : "http://marklogic.com/collation/codepoint"
+        },
+        "brand" : {
+          "datatype" : "string",
+          "description" : "Brand of the device",
+          "collation" : "http://marklogic.com/collation/codepoint"
+        },
+        "start_date" : {
+          "datatype" : "date",
+          "description" : "Contract start",
+          "collation" : "http://marklogic.com/collation/codepoint"
+        },
+        "end_date" : {
+          "datatype" : "date",
+          "description" : "Contract end"
+        },
+        "device_id" : {
+          "datatype" : "string",
+          "description" : "Unique device id",
+          "collation" : "http://marklogic.com/collation/codepoint"
+        }
+      }
+    }
+  }
+}

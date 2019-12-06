@@ -1,0 +1,69 @@
+{
+  "name": "@marklogic-community/grove-node",
+  "version": "1.0.0",
+  "description": "Node.js implementation of a Grove Middle-Tier for MarkLogic",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marklogic-community/grove-node.git"
+  },
+  "keywords": [
+    "Node",
+    "MarkLogic"
+  ],
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "helmet": "^3.12.1",
+    "marklogic": "^2.1.1",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "q": "^1.5.1",
+    "underscore": "^1.9.1",
+    "www-authenticate": "^0.6.2"
+  },
+  "engines": {
+    "node": ">=8.10.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "npm run lint && mocha --exit --recursive",
+    "test:watch": "npm run lint && mocha --exit --watch --recursive",
+    "start": "cross-env NODE_ENV=development nodemon node-app.js",
+    "start:prod": "node node-app.js"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "cross-env": "^5.1.6",
+    "eslint": "^5.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "mocha": "^5.2.0",
+    "nock": "^9.3.2",
+    "nodemon": "^1.17.5",
+    "prettier": "^1.13.7"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/marklogic-community/grove-node/issues"
+  },
+  "homepage": "https://github.com/marklogic-community/grove-node#readme",
+  "contributors": [
+    {
+      "name": "Matt Pileggi",
+      "url": "https://github.com/withjam"
+    },
+    {
+      "name": "Marianne Myers",
+      "url": "https://github.com/mariannemyers"
+    },
+    {
+      "name": "Geert Josten",
+      "url": "https://github.com/grtjn"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  marklogic:
+    image: gumball/marklogic:latest
+    volumes:
+      - type: volume
+        source: marklogic_data
+        target: /data
+    ports:
+      - "7997:7997/tcp"
+      - "8000-8002:8000-8002/tcp"
+      - "8063:8063/tcp"
+
+  nodejs:
+    image:  gumball/grove-node:latest
+    environment:
+      GROVE_ML_HOST: marklogic
+    links: 
+      - marklogic
+    ports:
+      - "9003:9003/tcp"
+      
+  gradle:
+    image: gradle:alpine
+    depends_on:
+      - "marklogic"
+    volumes:
+      - type: bind
+        source: ./marklogic
+        target: /home/gradle/project
+    working_dir: /home/gradle/project
+    command: "gradle -PmlHost=marklogic mlInit mlInstallAdmin mlDeploy"
+
+volumes:
+  marklogic_data:

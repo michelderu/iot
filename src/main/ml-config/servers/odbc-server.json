@@ -1,0 +1,10 @@
+{
+  "server-name": "%%mlFinalAppserverName%%-odbc",
+  "server-type": "odbc",
+  "root": "/",
+  "group-name": "%%GROUP%%",
+  "port": "8014",
+  "modules-database": "%%mlModulesDbName%%",
+  "content-database": "%%mlFinalDbName%%",
+  "authentication": "basic"
+}

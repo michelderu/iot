@@ -1,0 +1,22 @@
+{
+  "lang" : "zxx",
+  "name" : "Map_IOT",
+  "description" : "",
+  "type" : "CUSTOM",
+  "version" : 3,
+  "options" : {
+    "additionalCollections" : [ ],
+    "sourceQuery" : "cts.collectionQuery([\"Device\"])",
+    "targetEntity" : "IOT",
+    "collections" : [ "Map_IOT", "IOT" ],
+    "sourceDatabase" : "data-hub-STAGING",
+    "sourceCollection" : "Device",
+    "outputFormat" : "json",
+    "targetDatabase" : "data-hub-FINAL"
+  },
+  "customHook" : { },
+  "modulePath" : "/custom-modules/custom/Map_IOT/main.sjs",
+  "retryLimit" : 0,
+  "batchSize" : 100,
+  "threadCount" : 4
+}

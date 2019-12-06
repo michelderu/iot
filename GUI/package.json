@@ -1,0 +1,48 @@
+{
+  "name": "@marklogic-community/grove-react-template",
+  "version": "1.0.0",
+  "description": "React/Redux template for MarkLogic Grove",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marklogic-community/grove-react-template.git"
+  },
+  "devDependencies": {
+    "concurrently": "^3.6.1",
+    "cross-env": "^5.2.0"
+  },
+  "dependencies": {},
+  "scripts": {
+    "build": "cd ui && npm run build",
+    "lint": "cd middle-tier && npm run lint; cd ../ui && npm run lint",
+    "lint:fix": "cd middle-tier && npm run lint:fix; cd ../ui && npm run lint:fix",
+    "postinstall": "node scripts/postinstall.js",
+    "start": "concurrently --kill-others \"npm run middleTier\" \"npm run ui\" ",
+    "start:prod": "cross-env-shell NODE_ENV=production GROVE_UI_BUILD_PATH=../ui/build npm run middleTier:prod",
+    "middleTier": "cd middle-tier && npm start",
+    "middleTier:prod": "cd middle-tier && npm run start:prod",
+    "ui": "cd ui && npm start",
+    "test": "concurrently 'cd middle-tier && npm test' 'cd ui && npm test'"
+  },
+  "keywords": [
+    "MarkLogic",
+    "Grove",
+    "UI",
+    "search",
+    "React"
+  ],
+  "license": "Apache-2.0",
+  "contributors": [
+    {
+      "name": "Matt Pileggi",
+      "url": "https://github.com/withjam"
+    },
+    {
+      "name": "Marianne Myers",
+      "url": "https://github.com/mariannemyers"
+    },
+    {
+      "name": "Geert Josten",
+      "url": "https://github.com/grtjn"
+    }
+  ]
+}
