@@ -7,8 +7,8 @@
     "vertices" : { }
   },
   "Subscription" : {
-    "x" : 365,
-    "y" : 391,
+    "x" : 69,
+    "y" : 378,
     "width" : 350,
     "height" : 234,
     "vertices" : { }
@@ -18,6 +18,20 @@
     "y" : 92,
     "width" : 392,
     "height" : 258,
+    "vertices" : { }
+  },
+  "Coordinate" : {
+    "x" : 768,
+    "y" : 412,
+    "width" : 350,
+    "height" : 144,
+    "vertices" : { }
+  },
+  "coordinate" : {
+    "x" : 494,
+    "y" : 379,
+    "width" : 350,
+    "height" : 144,
     "vertices" : { }
   }
 }

@@ -5,6 +5,21 @@
     "baseUri" : "http://example.org/"
   },
   "definitions" : {
+    "coordinate" : {
+      "required" : [ ],
+      "pii" : [ ],
+      "elementRangeIndex" : [ ],
+      "rangeIndex" : [ ],
+      "wordLexicon" : [ ],
+      "properties" : {
+        "lat" : {
+          "datatype" : "float"
+        },
+        "lon" : {
+          "datatype" : "float"
+        }
+      }
+    },
     "Customer" : {
       "primaryKey" : "id",
       "required" : [ ],
@@ -40,6 +55,9 @@
           "items" : {
             "$ref" : "#/definitions/Subscription"
           }
+        },
+        "geo" : {
+          "$ref" : "#/definitions/coordinate"
         }
       }
     },

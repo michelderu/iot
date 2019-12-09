@@ -1,6 +1,6 @@
 {
   "name" : "Customer360",
-  "description" : "",
+  "description" : "null",
   "batchSize" : 1,
   "threadCount" : 4,
   "stopOnError" : false,
@@ -82,11 +82,11 @@
         "additionalCollections" : [ ],
         "sourceQuery" : "cts.collectionQuery([\"CRM\"])",
         "targetEntity" : "Customer",
-        "collections" : [ "Customer" ],
+        "collections" : [ "Map_Customer", "Customer" ],
         "sourceDatabase" : "data-hub-STAGING",
         "sourceCollection" : "CRM",
         "outputFormat" : "json",
-        "targetDatabase" : "data-hub-FINAL"
+        "targetDatabase" : "data-hub-STAGING"
       },
       "customHook" : null,
       "retryLimit" : 0,
@@ -95,6 +95,30 @@
       "stepDefinitionName" : "Map_Customer",
       "stepDefinitionType" : "CUSTOM",
       "modulePath" : "/custom-modules/custom/Map_Customer/main.sjs",
+      "mappingStep" : false,
+      "customStep" : true,
+      "mappingName" : null
+    },
+    "4" : {
+      "name" : "Geocode_Customer",
+      "description" : "",
+      "options" : {
+        "additionalCollections" : [ ],
+        "sourceQuery" : "cts.collectionQuery([\"Customer\"])",
+        "targetEntity" : "Customer",
+        "collections" : [ "Customer" ],
+        "sourceDatabase" : "data-hub-STAGING",
+        "sourceCollection" : "Customer",
+        "outputFormat" : "json",
+        "targetDatabase" : "data-hub-FINAL"
+      },
+      "customHook" : null,
+      "retryLimit" : null,
+      "batchSize" : null,
+      "threadCount" : null,
+      "stepDefinitionName" : "Geocode_Customer",
+      "stepDefinitionType" : "CUSTOM",
+      "modulePath" : "/custom-modules/custom/Geocode_Customer/main.sjs",
       "mappingStep" : false,
       "customStep" : true,
       "mappingName" : null

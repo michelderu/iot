@@ -3,16 +3,16 @@
   "name" : "Map_Customer",
   "description" : "",
   "type" : "CUSTOM",
-  "version" : 3,
+  "version" : 4,
   "options" : {
     "additionalCollections" : [ ],
     "sourceQuery" : "cts.collectionQuery([\"CRM\"])",
     "targetEntity" : "Customer",
-    "collections" : [ "Map_Customer", "Customer" ],
+    "collections" : [ "Customer" ],
     "sourceDatabase" : "data-hub-STAGING",
     "sourceCollection" : "CRM",
     "outputFormat" : "json",
-    "targetDatabase" : "data-hub-FINAL"
+    "targetDatabase" : "data-hub-STAGING"
   },
   "customHook" : { },
   "modulePath" : "/custom-modules/custom/Map_Customer/main.sjs",

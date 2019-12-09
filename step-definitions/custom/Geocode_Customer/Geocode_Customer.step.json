@@ -1,0 +1,22 @@
+{
+  "lang" : "zxx",
+  "name" : "Geocode_Customer",
+  "description" : "",
+  "type" : "CUSTOM",
+  "version" : 5,
+  "options" : {
+    "additionalCollections" : [ ],
+    "sourceQuery" : "cts.collectionQuery([\"Customer\"])",
+    "targetEntity" : "Customer",
+    "collections" : [ "Geocode_Customer", "Customer" ],
+    "sourceDatabase" : "data-hub-STAGING",
+    "sourceCollection" : "Customer",
+    "outputFormat" : "json",
+    "targetDatabase" : "data-hub-FINAL"
+  },
+  "customHook" : { },
+  "modulePath" : "/custom-modules/custom/Geocode_Customer/main.sjs",
+  "retryLimit" : 0,
+  "batchSize" : 100,
+  "threadCount" : 4
+}
