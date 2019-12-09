@@ -12,7 +12,7 @@
       "rangeIndex" : [ ],
       "wordLexicon" : [ ],
       "properties" : {
-        "device" : {
+        "device_type" : {
           "datatype" : "string",
           "description" : "Type of device",
           "collation" : "http://marklogic.com/collation/codepoint"

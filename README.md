@@ -25,21 +25,23 @@ Additionally there is a HTML front-end that will allow:
 - Google like searching
 - Analysts to include the unstructured information from PDF.
 
+![HTML front-end](images/grove.png)
+
 # Deploy the demo
-## Deploy Data Hub Framework
+## Deploy Data Hub Framework into MarkLogic
 From the `DHF` folder:
 ```sh
 ./gradlew mlDeploy
 ```
 
-## Deploy Data Hub Framework
+## Deploy Grove into MarkLogic
 From the `Grove/marklogic` folder:
 ```sh
 cd GUI/marklogic
 ./gradlew mlDeploy
 ```
 
-## Install the Grove Node.js modules
+## Install the Grove Node.js dependencies
 From the `Grove` folder:
 ```sh
 cd GUI
@@ -71,11 +73,7 @@ Follow these steps to demo:
 - Run the `Contracts` flow to ingest the unstructured PDF data, enriching it with the structured data, into a Contracts collection
 
 # Appendix
-## Prerequisites
-- MarkLogic Server (https://hub.docker.com/_/marklogic)
-- Data Hub Framework 5 (https://github.com/marklogic/marklogic-data-hub)
-
-### Install MarkLogic from Docker Hub
+## Install MarkLogic from Docker Hub
 This will download and run MarkLogic from Docker Hub, storing the MarkLogic data files locally in the current directoy under `./MarkLogic`.
 ```sh
 docker run -d -it \
@@ -86,6 +84,20 @@ docker run -d -it \
     -e MARKLOGIC_ADMIN_PASSWORD=admin \
     --name iot \
     store/marklogicdb/marklogic-server:10.0-2-dev-centos
+```
+
+## Ingesting contracts
+In order to ingest and convert contracts to machine reabable (and therefore searchable) text, first the MarkLogic Converters need to be installed.
+The installation packes can be found at https://developer.marklogic.com/products/marklogic-server/10.0 for your specific environment. Generic installation procedure to be found here: https://docs.marklogic.com/guide/installation/procedures#id_28962.
+
+### Install into Docker container
+In case of using the MarkLogic Docker image, you'll have to download and install the converters into the docker container like:
+```sh
+docker exec -it iot sh
+curl --output /tmp/MarkLogicConverters.rpm <the url you get from developer.marklogic.com when clicking on the button to use Curl>
+sudo yum install libgcc libgcc.i686 libstdc++ libstdc++.i686
+sudo rpm -i /tmp/MarkLogicConverters.rpm
+service MarkLogic restart
 ```
 
 ## Configure Visual Programming Plugin
@@ -119,8 +131,100 @@ cd ..
 ./gradlew mlReloadModules
 ```
 
-### Tail the Data Hub logfiles
+## Tail the Data Hub logfiles
 It can be helpful to put a tail on the logfile of the data hub as follows:
 ```sh
 tail -f MarkLogic/Logs/8010_ErrorLog.txt
 ```
+
+## Create an ODBC endpoint
+Create the file `src/main/ml-config/servers/odbc-server.json`:
+```sh
+{
+  "server-name": "%%mlFinalAppserverName%%-odbc",
+  "server-type": "odbc",
+  "root": "/",
+  "group-name": "%%GROUP%%",
+  "port": "8014",
+  "modules-database": "%%mlModulesDbName%%",
+  "content-database": "%%mlFinalDbName%%",
+  "authentication": "basic"
+}
+```
+
+## Create indexes in data-hub-FINAL for facetting/drilldown
+In file `src/main/ml-config/databases/final-database.json` add:
+```sh
+  "range-element-index": [
+    {
+      "scalar-type": "string",
+      "collation": "http://marklogic.com/collation/codepoint",
+      "namespace-uri": "",
+      "localname": "brand",
+      "range-value-positions": false,
+      "invalid-values": "ignore"
+    }, {
+      "scalar-type": "string",
+      "collation": "http://marklogic.com/collation/codepoint",
+      "namespace-uri": "",
+      "localname": "device_type",
+      "range-value-positions": false,
+      "invalid-values": "ignore"
+    }
+  ]
+```
+To load the changes, from the `DHF` folder:
+```sh
+./gradlew mlDeployDatabases
+```
+
+## Add collections and facets to Grove
+In file `GUI/marklogic/ml-modules/options/all.xml` add:
+```sh
+  <additional-query>
+    <cts:collection-query xmlns:cts="http://marklogic.com/cts">
+      <cts:uri>Customer</cts:uri>
+      <cts:uri>Contracts</cts:uri>
+      <cts:uri>Device</cts:uri>
+    </cts:collection-query>
+  </additional-query>
+```
+In file `GUI/marklogic/ml-modules/options/all.xml` add:
+```sh
+<constraint name="Device">
+<range type="xs:string" facet="true" collation="http://marklogic.com/collation/codepoint">
+    <facet-option>limit=10</facet-option>
+    <facet-option>frequency-order</facet-option>
+    <facet-option>descending</facet-option>
+    <element ns="" name="device_type"/>
+</range>
+</constraint>
+
+<constraint name="Brand">
+<range type="xs:string" facet="true" collation="http://marklogic.com/collation/codepoint">
+    <facet-option>limit=10</facet-option>
+    <facet-option>frequency-order</facet-option>
+    <facet-option>descending</facet-option>
+    <element ns="" name="brand"/>
+</range>
+</constraint>
+```
+To load the changes, from the `Grove/marklogic` folder:
+```sh
+cd GUI/marklogic
+./gradlew mlReloadModules
+```
+
+## Include result data to the search results for Grove
+In file `GUI/marklogic/ml-modules/options/all.xml` add:
+```sh
+  <extract-document-data>
+    <extract-path>/envelope/instance/Customer</extract-path>
+  </extract-document-data>
+```
+To load the changes, from the `Grove/marklogic` folder:
+```sh
+cd GUI/marklogic
+./gradlew mlReloadModules
+```
+

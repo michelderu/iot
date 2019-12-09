@@ -48,7 +48,7 @@
         "additionalCollections" : [ ],
         "sourceQuery" : "cts.collectionQuery([\"Device\"])",
         "targetEntity" : "IOT",
-        "collections" : [ "Map_IOT", "IOT" ],
+        "collections" : [ "IOT" ],
         "sourceDatabase" : "data-hub-STAGING",
         "sourceCollection" : "Device",
         "outputFormat" : "json",

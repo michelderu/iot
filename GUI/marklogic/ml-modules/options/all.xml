@@ -4,7 +4,7 @@
 
   <!-- Include actual document data in the results-->
   <extract-document-data>
-    <extract-path>/envelope/instance/Inventory</extract-path>
+    <extract-path>/envelope/instance/Customer</extract-path>
   </extract-document-data>
  
   <!-- Limit all searches to this additional query -->
@@ -118,11 +118,11 @@
 
   <!-- Example facet based on the sample-data -->
   <constraint name="Device">
-    <range type="xs:string" facet="true" collation="http://marklogic.com/collation/codepoint">
+    <range type="xs:string" facet="true" collation="http://marklogic.com/collation/en/S1">
       <facet-option>limit=10</facet-option>
       <facet-option>frequency-order</facet-option>
       <facet-option>descending</facet-option>
-      <element ns="" name="device"/>
+      <element ns="" name="device_type"/>
     </range>
   </constraint>
   
@@ -131,9 +131,28 @@
       <facet-option>limit=10</facet-option>
       <facet-option>frequency-order</facet-option>
       <facet-option>descending</facet-option>
-      <element ns="" name="type"/>
+      <element ns="" name="brand"/>
     </range>
   </constraint>
+
+  <constraint name="Maintenance">
+    <range type="xs:date" facet="true">
+      <element ns="" name="end_date"/>
+      <computed-bucket name="ended" lt="P0D" anchor="now">Subscription ended</computed-bucket>
+      <computed-bucket name="next_month" ge="P0D" lt="P31D" anchor="now">Ends next month</computed-bucket>
+      <computed-bucket name="half_year" ge="P31D" lt="P183D" anchor="now">Ends in half a year</computed-bucket>
+      <computed-bucket name="year" ge="P365D" anchor="now">Ends next year</computed-bucket>
+    </range>
+  </constraint>
+
+  <!--constraint name="Carbonmonoxide">
+    <range type="xs:int" facet="true">
+      <element ns="" name="co"/>
+      <bucket name="low" ge="0" lt="5">Low (0-5 ppm)</bucket>
+      <bucket name="warning" ge="5" lt="10">Warning (5-10 ppm)</bucket>
+      <bucket name="high" ge="10">High (> 10 ppm)</bucket>
+    </range>
+  </constraint-->
 
 <!--
   <constraint name="gender">

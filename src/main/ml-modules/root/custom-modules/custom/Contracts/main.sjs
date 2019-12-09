@@ -77,53 +77,39 @@ function main(content, options) {
 
   //insert code to manipulate the instance, triples, headers, uri, context metadata, etc.
   let filteredDoc = xdmp.documentFilter(doc);
-  //filteredDoc = xdmp.tidy(filteredDoc).toArray()[1];
-  filteredDoc = xdmp.quote(filteredDoc);
   //let filteredDoc = xdmp.pdfConvert(doc, sem.uuidString());
+  //filteredDoc = xdmp.quote(filteredDoc);
+  //filteredDoc = xdmp.tidy(filteredDoc).toArray()[1];
 
-  /*
-
-  // Get all publishers
-  let jsPublishers = `
+  // Get all publishers from FINAL database
+  let jsBrands = `
   var op = require("/MarkLogic/optic");
-  let publishers = op.fromView('Inventory', 'Inventory')
-  .where(
-    op.and(
-      op.eq(op.col("relevant"), true),
-      op.ne(op.col('norm_publisher'), 'null')
-    )
-  )
-  .select(['norm_publisher'])
+  let result = op.fromView('Customer', 'Subscription')
+  .select(['brand'])
   .result();
-  fn.distinctValues(publishers);
+  fn.distinctValues(result);
   `;
-  let publishers = xdmp.eval(jsPublishers, null, {"database" : xdmp.database("data-hub-FINAL")});
-  console.log(publishers);
+  let brands = xdmp.eval(jsBrands, null, {"database" : xdmp.database("data-hub-FINAL")});
 
-  // Get all products
-  let jsProducts = `
+  // Get all types from FINAL database
+  let jsTypes = `
   var op = require("/MarkLogic/optic");
-  let products = op.fromView('Inventory', 'Inventory')
-  .where(
-    op.and(
-      op.eq(op.col("relevant"), true),
-      op.ne(op.col('norm_product'), 'null')
-    )
-  )
-  .select(['norm_product'])
+  let result = op.fromView('Customer', 'Subscription')
+  .select(['device_type'])
   .result();
-  fn.distinctValues(products);
+  fn.distinctValues(result);
   `;
-  let products = xdmp.eval(jsProducts, null, {"database" : xdmp.database("data-hub-FINAL")});
-  console.log(products);
+  let types = xdmp.eval(jsTypes, null, {"database" : xdmp.database("data-hub-FINAL")});
 
   // Build up an entity array
   let entities = new Array();
-  for (var p of publishers) {
-    entities.push(cts.entity(sem.uuidString(), p['Inventory.Inventory.norm_publisher'], p['Inventory.Inventory.norm_publisher'], 'norm_publisher'));
+  for (var e of brands) {
+    // Entity Id, Normalized Name, Full Name, Entity Type
+    entities.push(cts.entity(sem.uuidString(), e['Customer.Subscription.brand'], e['Customer.Subscription.brand'], 'brand'));
   }
-  for (var p of products) {
-    entities.push(cts.entity(sem.uuidString(), p['Inventory.Inventory.norm_product'], p['Inventory.Inventory.norm_product'], 'norm_product'));
+  for (var e of types) {
+    // Entity Id, Normalized Name, Full Name, Entity Type
+    entities.push(cts.entity(sem.uuidString(), e['Customer.Subscription.device_type'], e['Customer.Subscription.device_type'], 'device_type'));
   }
   let dictionary = cts.entityDictionary(entities);
 
@@ -138,13 +124,7 @@ function main(content, options) {
     resultBuilder, dictionary);
   instance = resultBuilder.toNode();
 
-  */
-  
-  // Enrich postal codes
-  filteredDoc = fn.replace(filteredDoc, '(Feenstra)', '<type xmlns="">$1</type>');
-  filteredDoc = fn.replace(filteredDoc, '(warmtepomp)', '<device xmlns="">$1</device>');
-
-  instance = xdmp.unquote(filteredDoc);
+  //instance = xdmp.unquote(filteredDoc);
 
   //form our envelope here now, specifying our output format
   let envelope = datahub.flow.flowUtils.makeEnvelope(instance, headers, triples, outputFormat);

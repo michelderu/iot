@@ -82,7 +82,7 @@
         "additionalCollections" : [ ],
         "sourceQuery" : "cts.collectionQuery([\"CRM\"])",
         "targetEntity" : "Customer",
-        "collections" : [ "Map_Customer", "Customer" ],
+        "collections" : [ "Customer" ],
         "sourceDatabase" : "data-hub-STAGING",
         "sourceCollection" : "CRM",
         "outputFormat" : "json",

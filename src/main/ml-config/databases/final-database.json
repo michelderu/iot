@@ -10,14 +10,20 @@
       "scalar-type": "string",
       "collation": "http://marklogic.com/collation/codepoint",
       "namespace-uri": "",
-      "localname": "device",
+      "localname": "brand",
       "range-value-positions": false,
       "invalid-values": "ignore"
     }, {
       "scalar-type": "string",
-      "collation": "http://marklogic.com/collation/codepoint",
+      "collation": "http://marklogic.com/collation/en/S1",
       "namespace-uri": "",
-      "localname": "type",
+      "localname": "device_type",
+      "range-value-positions": false,
+      "invalid-values": "ignore"
+    }, {
+      "scalar-type": "date",
+      "namespace-uri": "",
+      "localname": "end_date",
       "range-value-positions": false,
       "invalid-values": "ignore"
     }

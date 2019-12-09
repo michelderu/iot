@@ -1,5 +1,4 @@
 {
-  "language" : "zxx",
   "path-namespace" : [ {
     "prefix" : "es",
     "namespace-uri" : "http://marklogic.com/entity-services"
