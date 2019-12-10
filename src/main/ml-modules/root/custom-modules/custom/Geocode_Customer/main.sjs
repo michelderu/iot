@@ -112,7 +112,7 @@ function geocode (address, api_key) {
   // When the HTTP response equals 200, take the lat/lon result
   result = result.toArray();
   if (result[0].code == '200') {
-    console.log('GEOCODE: MATCH: ' + result);
+    console.log('GEOCODE: MATCH (' + result[0].code + ' / ' + result[0].message + ')');
     return {
       coordinate: {
         "lat": result[1].root[0].lat,
