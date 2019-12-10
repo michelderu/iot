@@ -9,7 +9,11 @@ This demo show how MarkLogic and the Data Hub Framework can be used in IOT cases
 We will create three flows:
 1. The `Customer360 flow` that will ingest the CRM and ERP data and then harmonize it to a business entity Customer.
 2. The `IOT flow` that will ingest the raw JSON data coming from the devices
-3. The `Contracts flow` that will ingest the PDF files, convert them to machine readable text and enrich them based on the above information.
+3. The `Contracts flow` that will ingest the PDF files, convert them to machine readable text and enrich them based on the above information.  
+
+The Customer and IOT flow have been created using the brilliant Visual Programming Plugin:
+
+![Visual Programming Plugin](images/vpp.png)
 
 ## BI Visualisation
 Finally the data is provided through a Tableau dashboard showing the following information:
@@ -56,7 +60,7 @@ java -jar marklogic-datahub-5.0.4.war
 
 ## Start Visual Programming Plugin
 ```sh
-cd dist_user/DesignerUI
+cd visual-programming-plugin/dist_user/DesignerUI
 quasar serve --proxy ../proxy_rule.js
 ```
 
