@@ -1,6 +1,6 @@
 # IOT Demo
 ## Context and source data
-This demo show how MarkLogic and the Data Hub Framework can be used in IOT cases. There are three datasets avaiable:
+This demo shows how MarkLogic and the Data Hub Framework can be used in IOT cases. There are three datasets avaiable:
 - In this case, there is a company with disconnected CRM and ERP databases. Of both, there are CSV dumps available.  
 - Additionally there is a feed that provides IOT data from the devices under a service contract. This data is available as JSON data.
 - Furthermore the company has an ECM system that comtains contracts and documents in PDF format, relevant to the customers.
