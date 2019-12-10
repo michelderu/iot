@@ -24,6 +24,10 @@ Finally the data is provided through a Tableau dashboard showing the following i
 
 ![Tableau Dashboard](images/tableau.png)
 
+Additionally, there is a map view that shows the distribution of devices along with the current CO level at a glance:
+
+![Tableau Map](images/tableau_map.png)
+
 ## Web Visualisation
 Additionally there is a HTML front-end that will allow:
 - Google like searching
