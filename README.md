@@ -74,7 +74,7 @@ cd GUI
 npm start
 ```
 
-## Demo flow
+# Demo flow
 First explain a bit about the comapny, a utility services company, offering maintenance subscription to heatign, etc.  
 Then something about the data itself: CSV, JSON and PDF coming from silo applications like ERP, CRM and the devices itself.  
 The company has problems bringing all the data together in real-time to better serve their customers.  
@@ -94,7 +94,7 @@ Now we also want to include contractual information to pull up the right data wh
 
 Again show the HTML front-end Grove with contracts being added now. Click through the enriched data in the contracts using facets.  
 
-OK, our application is ready. Now create an Azure environment, and deploy to the server environment.  
+OK, our application is ready. Now create an Azure environment at https://portal.azure.com, update the `gradle-azure.properties` and deploy to the server environment.  
 
 EASY PEASY!
 
