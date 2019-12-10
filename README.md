@@ -75,6 +75,14 @@ npm start
 ```
 
 # Demo flow
+Prepare and open the following:
+- DHF (http://localhost:8080)
+- VPP (http://localhost:4000)
+- Grove (http://localhost:3000)
+- Azure portal (https://portal.azure.com)
+- Tableau (with the IOT Dashboard)
+- Favorite IDE (to show the data and to update the `gradle-azure.properties`)
+
 First explain a bit about the comapny, a utility services company, offering maintenance subscription to heatign, etc.  
 Then something about the data itself: CSV, JSON and PDF coming from silo applications like ERP, CRM and the devices itself.  
 The company has problems bringing all the data together in real-time to better serve their customers.  
@@ -254,3 +262,12 @@ cd GUI/marklogic
 ./gradlew mlReloadModules
 ```
 
+## Delete the contracts collection to start the demo over again
+Using query console at http://localhost:8000 and run the following against the data-hub-FINAL database:
+```javascript
+'use strict';
+declareUpdate();
+for (var d of fn.collection("Contracts")) {
+  xdmp.documentDelete(fn.baseUri(d))
+}
+```
