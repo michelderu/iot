@@ -114,18 +114,18 @@ All of the following actions are relative to the `visual-programming-plugin` fol
 ### Install Quasar
 Install quasar CLI.
 ```sh
-yarn global add quasar-cli
+npm install -g @quasar/cli
 ```
 
 ### Install the node packages
 ```sh
-yarn install
+npm install
 ```
 
 ### Override litegraph node_modules
 Make sure to override litegraph node_modules with the project one node_modules_override
 ```sh
-cp node_modules_override/litegraph.js node_modules/litegraph.js//build/.
+cp node_modules_override/litegraph.js node_modules/litegraph.js/build/litegraph.js
 ```
 
 ### Point VPP to the Data Hub
