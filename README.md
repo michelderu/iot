@@ -80,14 +80,14 @@ Then something about the data itself: CSV, JSON and PDF coming from silo applica
 The company has problems bringing all the data together in real-time to better serve their customers.  
 They decided to use the turn-key, low-code Data Integration solution from MarkLogic. Lets see what they came up with!  
 
-Follow these steps to demo:
+Login to the Data Hub Framework at http://localhost:8080 and follow these steps to demo:
 - Run the `Customer360` flow to ingest and harmonize the CRM and ERP data into a Customer360 view with geocoded addresses
 - Run the `DeviceData` flow to ingest the raw device JSON data into a harmonized IOT view
 
-After this, show the VPP flows to explain how the data was harmonized without a letter of coding.  
+After this, show the VPP flows at http://localhost:4000 to explain how the data was harmonized without a letter of coding.  
 
 Initially show the results in the Tableau dashboard  by clicking the Story `Company Dashboard`. Explain the live connection and show high CO values for instance.  
-Then show the same data using the HTML front-end Grove. Explain the Google like searching and facetting.  
+Then show the same data using the HTML front-end Grove at http://localhost:3000. Explain the Google like searching and facetting.  
 
 Now we also want to include contractual information to pull up the right data when the Customer Contact Centre needs it:
 - Run the `Contracts` flow to ingest the unstructured PDF data, enriching it with the structured data, into a Contracts collection
