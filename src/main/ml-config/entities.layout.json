@@ -1,14 +1,14 @@
 {
   "Customer" : {
-    "x" : 294,
-    "y" : 93,
+    "x" : 302,
+    "y" : 58,
     "width" : 350,
     "height" : 234,
     "vertices" : { }
   },
   "Subscription" : {
-    "x" : 69,
-    "y" : 378,
+    "x" : 90,
+    "y" : 335,
     "width" : 350,
     "height" : 234,
     "vertices" : { }
@@ -28,8 +28,8 @@
     "vertices" : { }
   },
   "coordinate" : {
-    "x" : 494,
-    "y" : 379,
+    "x" : 467,
+    "y" : 340,
     "width" : 350,
     "height" : 144,
     "vertices" : { }
