@@ -43,14 +43,14 @@ From the `DHF` folder:
 ```
 
 ## Deploy Grove into MarkLogic
-From the `Grove/marklogic` folder:
+From the `GUI/marklogic` folder:
 ```sh
 cd GUI/marklogic
 ./gradlew mlDeploy
 ```
 
 ## Install the Grove Node.js dependencies
-From the `Grove` folder:
+From the `GUI` folder:
 ```sh
 cd GUI
 npm install
@@ -173,7 +173,7 @@ tail -f MarkLogic/Logs/8010_ErrorLog.txt
 
 ## Create an ODBC endpoint
 Create the file `src/main/ml-config/servers/odbc-server.json`:
-```sh
+```json
 {
   "server-name": "%%mlFinalAppserverName%%-odbc",
   "server-type": "odbc",
@@ -188,24 +188,24 @@ Create the file `src/main/ml-config/servers/odbc-server.json`:
 
 ## Create indexes in data-hub-FINAL for facetting/drilldown
 In file `src/main/ml-config/databases/final-database.json` add:
-```sh
-  "range-element-index": [
-    {
-      "scalar-type": "string",
-      "collation": "http://marklogic.com/collation/codepoint",
-      "namespace-uri": "",
-      "localname": "brand",
-      "range-value-positions": false,
-      "invalid-values": "ignore"
-    }, {
-      "scalar-type": "string",
-      "collation": "http://marklogic.com/collation/codepoint",
-      "namespace-uri": "",
-      "localname": "device_type",
-      "range-value-positions": false,
-      "invalid-values": "ignore"
-    }
-  ]
+```json
+"range-element-index": [
+  {
+    "scalar-type": "string",
+    "collation": "http://marklogic.com/collation/codepoint",
+    "namespace-uri": "",
+    "localname": "brand",
+    "range-value-positions": false,
+    "invalid-values": "ignore"
+  }, {
+    "scalar-type": "string",
+    "collation": "http://marklogic.com/collation/codepoint",
+    "namespace-uri": "",
+    "localname": "device_type",
+    "range-value-positions": false,
+    "invalid-values": "ignore"
+  }
+]
 ```
 To load the changes, from the `DHF` folder:
 ```sh
@@ -214,17 +214,17 @@ To load the changes, from the `DHF` folder:
 
 ## Add collections and facets to Grove
 In file `GUI/marklogic/ml-modules/options/all.xml` add:
-```sh
-  <additional-query>
-    <cts:collection-query xmlns:cts="http://marklogic.com/cts">
-      <cts:uri>Customer</cts:uri>
-      <cts:uri>Contracts</cts:uri>
-      <cts:uri>Device</cts:uri>
-    </cts:collection-query>
-  </additional-query>
+```xml
+<additional-query>
+  <cts:collection-query xmlns:cts="http://marklogic.com/cts">
+    <cts:uri>Customer</cts:uri>
+    <cts:uri>Contracts</cts:uri>
+    <cts:uri>Device</cts:uri>
+  </cts:collection-query>
+</additional-query>
 ```
 In file `GUI/marklogic/ml-modules/options/all.xml` add:
-```sh
+```xml
 <constraint name="Device">
 <range type="xs:string" facet="true" collation="http://marklogic.com/collation/codepoint">
     <facet-option>limit=10</facet-option>
@@ -243,7 +243,7 @@ In file `GUI/marklogic/ml-modules/options/all.xml` add:
 </range>
 </constraint>
 ```
-To load the changes, from the `Grove/marklogic` folder:
+To load the changes, from the `GUI/marklogic` folder:
 ```sh
 cd GUI/marklogic
 ./gradlew mlReloadModules
@@ -251,12 +251,12 @@ cd GUI/marklogic
 
 ## Include result data to the search results for Grove
 In file `GUI/marklogic/ml-modules/options/all.xml` add:
-```sh
-  <extract-document-data>
-    <extract-path>/envelope/instance/Customer</extract-path>
-  </extract-document-data>
+```xml
+<extract-document-data>
+  <extract-path>/envelope/instance/Customer</extract-path>
+</extract-document-data>
 ```
-To load the changes, from the `Grove/marklogic` folder:
+To load the changes, from the `GUI/marklogic` folder:
 ```sh
 cd GUI/marklogic
 ./gradlew mlReloadModules
