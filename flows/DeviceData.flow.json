@@ -36,10 +36,7 @@
         "inputFileType" : "json",
         "outputURIReplacement" : ".*data/,'/'",
         "separator" : ","
-      },
-      "mappingStep" : false,
-      "customStep" : false,
-      "mappingName" : null
+      }
     },
     "2" : {
       "name" : "Map_IOT",
@@ -55,15 +52,11 @@
         "targetDatabase" : "data-hub-FINAL"
       },
       "customHook" : null,
-      "retryLimit" : null,
-      "batchSize" : null,
-      "threadCount" : null,
+      "retryLimit" : 0,
+      "batchSize" : 0,
+      "threadCount" : 0,
       "stepDefinitionName" : "Map_IOT",
-      "stepDefinitionType" : "CUSTOM",
-      "modulePath" : "/custom-modules/custom/Map_IOT/main.sjs",
-      "mappingStep" : false,
-      "customStep" : true,
-      "mappingName" : null
+      "stepDefinitionType" : "CUSTOM"
     }
   }
 }

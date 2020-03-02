@@ -21,7 +21,7 @@
         },
         "sourceQuery" : "cts.collectionQuery([])",
         "collections" : [ "CRM" ],
-        "permissions" : "rest-reader,read,rest-writer,update",
+        "permissions" : "data-hub-operator,read,data-hub-operator,update",
         "outputFormat" : "json",
         "targetDatabase" : "data-hub-STAGING"
       },
@@ -32,14 +32,11 @@
       "stepDefinitionName" : "default-ingestion",
       "stepDefinitionType" : "INGESTION",
       "fileLocations" : {
-        "inputFilePath" : "/Users/mderu/projects/iot/data/CRM",
+        "inputFilePath" : "/Users/smitrovi/MarkLogic/dev/iot/data/CRM",
         "inputFileType" : "csv",
         "outputURIReplacement" : ".*data,''",
         "separator" : ","
-      },
-      "mappingStep" : false,
-      "customStep" : false,
-      "mappingName" : null
+      }
     },
     "2" : {
       "name" : "ERP",
@@ -55,25 +52,22 @@
         },
         "sourceQuery" : "cts.collectionQuery([])",
         "collections" : [ "ERP" ],
-        "permissions" : "rest-reader,read,rest-writer,update",
+        "permissions" : "data-hub-operator,read,data-hub-operator,update",
         "outputFormat" : "json",
         "targetDatabase" : "data-hub-STAGING"
       },
       "customHook" : { },
-      "retryLimit" : 0,
+      "retryLimit" : null,
       "batchSize" : 0,
       "threadCount" : 0,
       "stepDefinitionName" : "default-ingestion",
       "stepDefinitionType" : "INGESTION",
       "fileLocations" : {
-        "inputFilePath" : "/Users/mderu/projects/iot/data/ERP",
+        "inputFilePath" : "/Users/smitrovi/MarkLogic/dev/iot/data/ERP",
         "inputFileType" : "csv",
         "outputURIReplacement" : ".*data,''",
         "separator" : ","
-      },
-      "mappingStep" : false,
-      "customStep" : false,
-      "mappingName" : null
+      }
     },
     "3" : {
       "name" : "Map_Customer",
@@ -82,22 +76,18 @@
         "additionalCollections" : [ ],
         "sourceQuery" : "cts.collectionQuery([\"CRM\"])",
         "targetEntity" : "Customer",
-        "collections" : [ "Map_Customer"],
+        "collections" : [ "Map_Customer" ],
         "sourceDatabase" : "data-hub-STAGING",
         "sourceCollection" : "CRM",
         "outputFormat" : "json",
         "targetDatabase" : "data-hub-STAGING"
       },
       "customHook" : null,
-      "retryLimit" : null,
-      "batchSize" : null,
-      "threadCount" : null,
+      "retryLimit" : 0,
+      "batchSize" : 0,
+      "threadCount" : 0,
       "stepDefinitionName" : "Map_Customer",
-      "stepDefinitionType" : "CUSTOM",
-      "modulePath" : "/custom-modules/custom/Map_Customer/main.sjs",
-      "mappingStep" : false,
-      "customStep" : true,
-      "mappingName" : null
+      "stepDefinitionType" : "CUSTOM"
     },
     "4" : {
       "name" : "Geocode_Customer",
@@ -117,11 +107,7 @@
       "batchSize" : 1000,
       "threadCount" : 1,
       "stepDefinitionName" : "Geocode_Customer",
-      "stepDefinitionType" : "CUSTOM",
-      "modulePath" : "/custom-modules/custom/Geocode_Customer/main.sjs",
-      "mappingStep" : false,
-      "customStep" : true,
-      "mappingName" : null
+      "stepDefinitionType" : "CUSTOM"
     }
   }
 }

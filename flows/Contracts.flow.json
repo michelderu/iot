@@ -36,10 +36,7 @@
         "inputFileType" : "binary",
         "outputURIReplacement" : "",
         "separator" : ","
-      },
-      "mappingStep" : false,
-      "customStep" : false,
-      "mappingName" : null
+      }
     },
     "2" : {
       "name" : "Contracts",
@@ -59,11 +56,7 @@
       "batchSize" : 0,
       "threadCount" : 0,
       "stepDefinitionName" : "Contracts",
-      "stepDefinitionType" : "CUSTOM",
-      "modulePath" : "/custom-modules/custom/Contracts/main.sjs",
-      "mappingStep" : false,
-      "customStep" : true,
-      "mappingName" : null
+      "stepDefinitionType" : "CUSTOM"
     }
   }
 }
