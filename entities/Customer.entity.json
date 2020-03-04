@@ -64,7 +64,7 @@
     "Subscription" : {
       "required" : [ ],
       "pii" : [ ],
-      "elementRangeIndex" : [ ],
+      "elementRangeIndex" : [ "brand" ],
       "rangeIndex" : [ ],
       "wordLexicon" : [ ],
       "properties" : {

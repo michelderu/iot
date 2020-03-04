@@ -21,21 +21,21 @@
         },
         "sourceQuery" : "cts.collectionQuery([])",
         "collections" : [ "PDF" ],
-        "permissions" : "rest-reader,read,rest-writer,update",
+        "permissions" : "data-hub-operator,read,data-hub-operator,update",
         "outputFormat" : "binary",
         "targetDatabase" : "data-hub-STAGING"
       },
       "customHook" : { },
-      "retryLimit" : 0,
+      "retryLimit" : null,
       "batchSize" : 0,
       "threadCount" : 0,
       "stepDefinitionName" : "default-ingestion",
       "stepDefinitionType" : "INGESTION",
       "fileLocations" : {
-        "inputFilePath" : "/Users/mderu/projects/iot/data/Contracts",
+        "inputFilePath" : "/Users/smitrovi/dev/iot/data/Contracts",
         "inputFileType" : "binary",
         "outputURIReplacement" : "",
-        "separator" : ","
+        "separator" : ""
       }
     },
     "2" : {

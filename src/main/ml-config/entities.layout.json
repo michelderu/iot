@@ -2,22 +2,22 @@
   "Customer" : {
     "x" : 302,
     "y" : 58,
-    "width" : 350,
-    "height" : 234,
+    "width" : 418,
+    "height" : 256,
     "vertices" : { }
   },
   "Subscription" : {
-    "x" : 90,
-    "y" : 335,
-    "width" : 350,
-    "height" : 234,
+    "x" : 72,
+    "y" : 357,
+    "width" : 387,
+    "height" : 289,
     "vertices" : { }
   },
   "IOT" : {
-    "x" : 880,
-    "y" : 92,
-    "width" : 392,
-    "height" : 258,
+    "x" : 1002,
+    "y" : 116,
+    "width" : 548,
+    "height" : 364,
     "vertices" : { }
   },
   "Coordinate" : {
@@ -28,10 +28,10 @@
     "vertices" : { }
   },
   "coordinate" : {
-    "x" : 467,
-    "y" : 340,
-    "width" : 350,
-    "height" : 144,
+    "x" : 530,
+    "y" : 419,
+    "width" : 376,
+    "height" : 177,
     "vertices" : { }
   }
 }

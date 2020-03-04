@@ -6,10 +6,9 @@
   },
   "definitions" : {
     "IOT" : {
-      "primaryKey" : "id",
       "required" : [ ],
       "pii" : [ ],
-      "elementRangeIndex" : [ ],
+      "elementRangeIndex" : [ "water_temp", "request_temp", "outside_temp" ],
       "rangeIndex" : [ ],
       "wordLexicon" : [ ],
       "properties" : {

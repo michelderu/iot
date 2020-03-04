@@ -16,4 +16,4 @@ __pycache__/
 .vscode/
 marklogic-datahub-5.2.0-rc1.war
 marklogic-explorer-5.2.0-rc1.war
-marklogic-pipes-1.0.jar
+*.jar
