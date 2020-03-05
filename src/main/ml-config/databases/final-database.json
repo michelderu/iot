@@ -5,27 +5,5 @@
   "triple-index": true,
   "collection-lexicon": true,
   "uri-lexicon": true,
-  "range-element-index": [
-    {
-      "scalar-type": "string",
-      "collation": "http://marklogic.com/collation/codepoint",
-      "namespace-uri": "",
-      "localname": "brand",
-      "range-value-positions": false,
-      "invalid-values": "ignore"
-    }, {
-      "scalar-type": "string",
-      "collation": "http://marklogic.com/collation/en/S1",
-      "namespace-uri": "",
-      "localname": "device_type",
-      "range-value-positions": false,
-      "invalid-values": "ignore"
-    }, {
-      "scalar-type": "date",
-      "namespace-uri": "",
-      "localname": "end_date",
-      "range-value-positions": false,
-      "invalid-values": "ignore"
-    }
-  ]
+  "range-element-index": []
 }

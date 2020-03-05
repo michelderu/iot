@@ -8,16 +8,16 @@
   },
   "Subscription" : {
     "x" : 72,
-    "y" : 357,
-    "width" : 387,
-    "height" : 289,
+    "y" : 354,
+    "width" : 388,
+    "height" : 224,
     "vertices" : { }
   },
   "IOT" : {
-    "x" : 1002,
-    "y" : 116,
-    "width" : 548,
-    "height" : 364,
+    "x" : 869,
+    "y" : 35,
+    "width" : 495,
+    "height" : 281,
     "vertices" : { }
   },
   "Coordinate" : {
@@ -30,8 +30,8 @@
   "coordinate" : {
     "x" : 530,
     "y" : 419,
-    "width" : 376,
-    "height" : 177,
+    "width" : 379,
+    "height" : 159,
     "vertices" : { }
   }
 }

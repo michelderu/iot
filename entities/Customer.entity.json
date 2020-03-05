@@ -62,9 +62,10 @@
       }
     },
     "Subscription" : {
+      "primaryKey" : "device_id",
       "required" : [ ],
       "pii" : [ ],
-      "elementRangeIndex" : [ "brand" ],
+      "elementRangeIndex" : [ "brand", "start_date", "end_date" ],
       "rangeIndex" : [ ],
       "wordLexicon" : [ ],
       "properties" : {
